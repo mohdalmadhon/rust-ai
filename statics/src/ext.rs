@@ -5,6 +5,7 @@ use crate::utils;
 pub trait Stats {
     fn mean(&self) -> Result<f64>;
     fn median(&self) -> Result<f64>;
+    fn mode(&self) -> Result<Vec<f64>>;
 }
 
 pub trait Sort {
@@ -17,6 +18,9 @@ impl Stats for [f64] {
     }
     fn median(&self) -> Result<f64> {
         descriptive::mean(self)
+    }
+    fn mode(&self) -> Result<Vec<f64>> {
+       descriptive::mode(self) 
     }
 }
 
