@@ -3,3 +3,6 @@
 
 # lock file
 Cargo.lock
+
+target/
+Cargo.lock
