@@ -1,7 +1,7 @@
 use statics::*;
 
-fn main() -> Result<()> {
+fn main()  {
     let mut rng = Rng::from_time();
-    
+        
 
 }

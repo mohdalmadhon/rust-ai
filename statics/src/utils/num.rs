@@ -1,4 +1,6 @@
-pub trait Num: Copy + PartialOrd + PartialEq {
+use std::ops::{Add, Div, Mul, Sub};
+
+pub trait Num: Copy + PartialOrd + PartialEq + Div + Sub + Add + Mul {
     fn to_f64(self) -> f64;
 }
 
