@@ -1,10 +1,7 @@
-use statics::Stats;
+use statics::*;
 
-pub fn main() {
-    let data: [f64; 3] = [1.0, 1.0, 3.0];
+fn main() -> Result<()> {
+    let mut rng = Rng::from_time();
 
-    match data.percentile() {
-        Ok(value) => println!("{}", value),
-        Err(e) => println!("Error: {}", e),
-    }
+    
 }

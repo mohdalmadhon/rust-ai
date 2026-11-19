@@ -36,7 +36,7 @@ pub fn percentile(data: &[f64], x: f64) -> Result<f64> {
     }
     let mut vec: Vec<f64> = data.to_vec();
     vec.merge_sort();
-
+    
     let r = (x / 100.0) * (data.len() - 1) as f64;
     let i = r.floor() as usize;
     let f = r - i as f64;

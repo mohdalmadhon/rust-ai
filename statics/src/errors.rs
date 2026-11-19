@@ -5,6 +5,7 @@ pub enum StatsErrors {
     EmptyInput,
     LengthMismatch,
     NotEnoughData { needed: usize, got: usize },
+    InvalidRange,
 }
 
 impl fmt::Display for StatsErrors {
@@ -14,7 +15,8 @@ impl fmt::Display for StatsErrors {
             StatsErrors::LengthMismatch => write!(f, "inputs have different lengths"),
             StatsErrors::NotEnoughData { needed, got } => {
                 write!(f, "need at least {needed} values, got {got}")
-            }
+            },
+            StatsErrors::InvalidRange => write!(f, "min must be less than max"),
         }
     }
 }
