@@ -5,7 +5,9 @@ pub trait Num: Copy {
 macro_rules! impl_num {
     ($($t:ty),*) => {
         $(impl Num for $t {
-            fn to_f64(self) -> f64 { self as f64 }
+            fn to_f64(self) -> f64 {
+                self as f64
+            }
         })*
     };
 }

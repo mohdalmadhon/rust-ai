@@ -1,6 +1,7 @@
 use crate::errors::Result;
 use crate::descriptive;
 use crate::utils;
+use crate::utils::num::Num;
 
 pub trait Stats {
     fn mean(&self) -> Result<f64>;
@@ -17,30 +18,34 @@ pub trait Sort {
     fn merge_sort(&mut self) -> ();
 }
 
-impl Stats for [f64] {
+fn to_f64_vec<T: Num>(data: &[T]) -> Vec<f64> {
+    data.iter().map(|x| x.to_f64()).collect()
+}
+
+impl<T: Num> Stats for [T] {
     fn mean(&self) -> Result<f64> {
-        descriptive::mean(self)
+        descriptive::mean(&to_f64_vec(self))
     }
     fn median(&self) -> Result<f64> {
-        descriptive::median(self)
+        descriptive::median(&to_f64_vec(self))
     }
     fn mode(&self) -> Result<Vec<f64>> {
-       descriptive::mode(self) 
+        descriptive::mode(&to_f64_vec(self))
     }
     fn var(&self) -> Result<f64> {
-        descriptive::var(self)
+        descriptive::var(&to_f64_vec(self))
     }
     fn pop_var(&self) -> Result<f64> {
-        descriptive::pop_var(self)
+        descriptive::pop_var(&to_f64_vec(self))
     }
     fn std_dev(&self) -> Result<f64> {
-        descriptive::std_dev(self)
+        descriptive::std_dev(&to_f64_vec(self))
     }
     fn pop_std_dev(&self) -> Result<f64> {
-        descriptive::pop_std_dev(self)
+        descriptive::pop_std_dev(&to_f64_vec(self))
     }
     fn percentile(&self, x: f64) -> Result<f64> {
-        descriptive::percentile(self, x)
+        descriptive::percentile(&to_f64_vec(self), x)
     }
 }
 

@@ -1,46 +1,48 @@
-use crate::Sort;
 use crate::errors::{Result, StatsErrors};
+use crate::utils::num::Num;
 use crate::utils::sort::merge_sort;
 
-pub fn mean<T>(data: &[f64]) -> Result<f64> 
-where T: Copy + Into<f64>
-{
-    let n: usize = data.len();
-    if n == 0 {
-        return Err(StatsErrors::EmptyInput);
-    }
-    Ok(data.iter().sum::<f64>() / n as f64)
+fn to_sorted_f64<T: Num>(data: &[T]) -> Vec<f64> {
+    let mut v: Vec<f64> = data.iter().map(|x| x.to_f64()).collect();
+    merge_sort(&mut v);
+    v
 }
 
-pub fn median(data: &[f64]) -> Result<f64> {
+pub fn mean<T: Num>(data: &[T]) -> Result<f64> {
     let n: usize = data.len();
     if n == 0 {
         return Err(StatsErrors::EmptyInput);
     }
-    let mut vec: Vec<f64> = data.to_vec();
-    vec.merge_sort();
+    let sum: f64 = data.iter().map(|x| x.to_f64()).sum();
+    Ok(sum / n as f64)
+}
+
+pub fn median<T: Num>(data: &[T]) -> Result<f64> {
+    let n: usize = data.len();
+    if n == 0 {
+        return Err(StatsErrors::EmptyInput);
+    }
+    let v = to_sorted_f64(data);
 
     if n % 2 == 0 {
-        Ok((vec[n / 2 - 1] + vec[n / 2]) / 2.0)
+        Ok((v[n / 2 - 1] + v[n / 2]) / 2.0)
     } else {
-        Ok(vec[n / 2])
+        Ok(v[n / 2])
     }
-} 
+}
 
-pub fn mode(data: &[f64]) -> Result<Vec<f64>> {
+pub fn mode<T: Num>(data: &[T]) -> Result<Vec<f64>> {
     if data.is_empty() {
         return Err(StatsErrors::EmptyInput);
     }
 
-    let mut v = data.to_vec();
-    merge_sort(&mut v);
+    let v = to_sorted_f64(data);
 
     let mut modes: Vec<f64> = Vec::new();
-    let mut best = 0;     
+    let mut best = 0;
     let mut i = 0;
 
     while i < v.len() {
-        
         let mut j = i;
         while j < v.len() && v[j] == v[i] {
             j += 1;
@@ -55,7 +57,7 @@ pub fn mode(data: &[f64]) -> Result<Vec<f64>> {
             modes.push(v[i]);
         }
 
-        i = j;   
+        i = j;
     }
 
     Ok(modes)

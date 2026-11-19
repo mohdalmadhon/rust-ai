@@ -1,13 +1,15 @@
+use crate::utils::num::Num;
 
-pub fn merge_sort(data: &mut [f64]) {
+
+pub fn merge_sort<T: Num>(data: &mut [T]) {
     let n: usize = data.len();
     
     if n <= 1 {return}
 
     let middle: usize = n / 2;
 
-    let mut right: Vec<f64> = Vec::new();
-    let mut left: Vec<f64> = Vec::new();
+    let mut right: Vec<T> = Vec::new();
+    let mut left: Vec<T> = Vec::new();
 
     
 
@@ -23,7 +25,7 @@ pub fn merge_sort(data: &mut [f64]) {
     merge(&mut left, &mut right, data);
 }
 
-fn merge(left: &mut [f64], right: &mut [f64], arr: &mut [f64]) {
+fn merge<T: Num>(left: &mut [T], right: &mut [T], arr: &mut [T]) {
     let left_size: usize = arr.len() / 2;
     let right_size: usize = arr.len() - left_size;
     
