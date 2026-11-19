@@ -6,6 +6,11 @@ pub trait Stats {
     fn mean(&self) -> Result<f64>;
     fn median(&self) -> Result<f64>;
     fn mode(&self) -> Result<Vec<f64>>;
+    fn var(&self) -> Result<f64>;
+    fn pop_var(&self) -> Result<f64>;
+    fn std_dev(&self) -> Result<f64>;
+    fn pop_std_dev(&self) -> Result<f64>;
+    fn percentile(&self, x: f64) -> Result<f64>;
 }
 
 pub trait Sort {
@@ -17,10 +22,25 @@ impl Stats for [f64] {
         descriptive::mean(self)
     }
     fn median(&self) -> Result<f64> {
-        descriptive::mean(self)
+        descriptive::median(self)
     }
     fn mode(&self) -> Result<Vec<f64>> {
        descriptive::mode(self) 
+    }
+    fn var(&self) -> Result<f64> {
+        descriptive::var(self)
+    }
+    fn pop_var(&self) -> Result<f64> {
+        descriptive::pop_var(self)
+    }
+    fn std_dev(&self) -> Result<f64> {
+        descriptive::std_dev(self)
+    }
+    fn pop_std_dev(&self) -> Result<f64> {
+        descriptive::pop_std_dev(self)
+    }
+    fn percentile(&self, x: f64) -> Result<f64> {
+        descriptive::percentile(self, x)
     }
 }
 
