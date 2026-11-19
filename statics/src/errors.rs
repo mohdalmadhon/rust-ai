@@ -6,6 +6,7 @@ pub enum StatsErrors {
     LengthMismatch,
     NotEnoughData { needed: usize, got: usize },
     InvalidRange,
+    InvalidStdDev,
 }
 
 impl fmt::Display for StatsErrors {
@@ -17,6 +18,7 @@ impl fmt::Display for StatsErrors {
                 write!(f, "need at least {needed} values, got {got}")
             },
             StatsErrors::InvalidRange => write!(f, "min must be less than max"),
+            StatsErrors::InvalidStdDev => write!(f, "standard deviation must be zero or positive"),
         }
     }
 }
