@@ -28,7 +28,7 @@ pub fn merge_sort<T: Num>(data: &mut [T]) {
 fn merge<T: Num>(left: &mut [T], right: &mut [T], arr: &mut [T]) {
     let left_size: usize = arr.len() / 2;
     let right_size: usize = arr.len() - left_size;
-    
+        
     let mut i = 0;
     let mut l = 0;
     let mut r = 0;

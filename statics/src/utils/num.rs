@@ -1,4 +1,4 @@
-pub trait Num: Copy {
+pub trait Num: Copy + PartialOrd + PartialEq {
     fn to_f64(self) -> f64;
 }
 
