@@ -1,0 +1,5 @@
+# build output (compiled code, dependency builds)
+/target
+
+# lock file
+Cargo.lock
