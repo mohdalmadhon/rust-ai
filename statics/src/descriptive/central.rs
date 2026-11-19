@@ -2,7 +2,9 @@ use crate::Sort;
 use crate::errors::{Result, StatsErrors};
 use crate::utils::sort::merge_sort;
 
-pub fn mean(data: &[f64]) -> Result<f64> {
+pub fn mean<T>(data: &[f64]) -> Result<f64> 
+where T: Copy + Into<f64>
+{
     let n: usize = data.len();
     if n == 0 {
         return Err(StatsErrors::EmptyInput);
